@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Button } from '@chakra-ui/button';
 import { Icon } from '@chakra-ui/icon';
 
@@ -144,8 +144,9 @@ const metamaskIcon = (
 );
 
 const MetamaskButton = () => {
-  const { requestAccounts, account } = useWeb3();
   const toast = useToast();
+  const { requestAccounts, account } = useWeb3();
+  const isConnectedOnce = useRef(false);
   const isConnected = Boolean(account);
 
   useEffect(() => {
@@ -154,6 +155,14 @@ const MetamaskButton = () => {
         title: 'Connected to account successfully',
         description: `Account: ${account.slice(0, 4)}****${account.slice(-6)}`,
       });
+      isConnectedOnce.current = true;
+    }
+
+    if (!account && isConnectedOnce.current) {
+      toast('warning', {
+        title: 'No account connected',
+      });
+      isConnectedOnce.current = false;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);

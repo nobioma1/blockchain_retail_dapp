@@ -1,4 +1,11 @@
-import { createContext, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Web3 } from 'web3';
 
@@ -13,20 +20,16 @@ const Web3Provider = ({ children }) => {
 
   const handleConnectedAccount = useCallback(
     async (accounts) => {
-      if (accounts.length === 0) return;
-
-      const [currentAccount] = accounts;
+      const currentAccount = accounts[0] ?? '';
 
       if (currentAccount !== account) {
         setAccount(currentAccount);
       }
-
-      return currentAccount;
     },
     [account]
   );
 
-  const requestAccounts = async () => {
+  const requestAccounts = useCallback(async () => {
     if (!isEnabled) {
       throw new Error(
         'No Provider detected, use a with browser with Metamask installed'
@@ -38,7 +41,7 @@ const Web3Provider = ({ children }) => {
     });
 
     return handleConnectedAccount(accounts);
-  };
+  }, [handleConnectedAccount, isEnabled]);
 
   useEffect(() => {
     if (!ethRef.current) return;
@@ -59,17 +62,18 @@ const Web3Provider = ({ children }) => {
     };
   }, [handleConnectedAccount]);
 
-  return (
-    <Web3Context.Provider
-      value={{
-        account,
-        isEnabled: isEnabled && ethRef.current,
-        requestAccounts,
-      }}
-    >
-      {children}
-    </Web3Context.Provider>
+  const isEnabledForWeb3 = isEnabled && ethRef.current;
+
+  const value = useMemo(
+    () => ({
+      account,
+      isEnabled: isEnabledForWeb3,
+      requestAccounts,
+    }),
+    [account, isEnabledForWeb3, requestAccounts]
   );
+
+  return <Web3Context.Provider value={value}>{children}</Web3Context.Provider>;
 };
 
 Web3Provider.propTypes = {
