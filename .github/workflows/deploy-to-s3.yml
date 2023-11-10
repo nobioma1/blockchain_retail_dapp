@@ -15,7 +15,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume:  ${{ secrets.AWS_ROLE-TO_ASSUME }}
+          role-to-assume:  ${{ secrets.AWS_ROLE_TO_ASSUME }}
 
       - name: Build React App
         run: npm install && npm run build
