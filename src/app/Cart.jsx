@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
+import { GiTakeMyMoney } from 'react-icons/gi';
+import { BsShop } from 'react-icons/bs';
 import {
   Box,
   Button,
@@ -10,9 +12,6 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Flex,
-  HStack,
-  Stack,
   Table,
   TableContainer,
   Tbody,
@@ -116,10 +115,17 @@ const Cart = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={onClose}
+              leftIcon={<BsShop />}
+            >
+              Continue Shopping
             </Button>
-            <Button colorScheme="blue">Checkout</Button>
+            <Button colorScheme="blue" rightIcon={<GiTakeMyMoney />}>
+              Checkout
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

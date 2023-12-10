@@ -17,7 +17,7 @@ const Products = () => {
   }
 
   return (
-    <Wrap spacing="32px" margin="0 auto" maxWidth="1280px" p={5}>
+    <Wrap spacing="32px">
       {data.map((product) => (
         <WrapItem
           key={product.id}
