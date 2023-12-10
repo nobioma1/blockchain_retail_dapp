@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import { Web3 } from 'web3';
 
-export const Web3Context = createContext({});
+export const Web3Context = createContext(null);
 
 const Web3Provider = ({ children }) => {
   const [isEnabled, setIsEnabled] = useState(false);
