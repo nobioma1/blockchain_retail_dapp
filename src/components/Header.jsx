@@ -30,7 +30,7 @@ const Header = () => {
           <HStack>
             <Icon as={LiaShoePrintsSolid} boxSize={6} />
             <Text fontWeight="bold" fontSize="3xl" fontFamily="Bubblegum Sans">
-              Futas
+              Futa
             </Text>
           </HStack>
         </Link>

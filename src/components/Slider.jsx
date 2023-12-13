@@ -30,11 +30,16 @@ const SliderImage = ({ src }) => {
 const Slider = () => {
   return (
     <Stack margin="0 auto" maxWidth="1280px" spacing={2}>
-      <Text fontSize="lg" color="green.600">
-        Coming soon to Futa this holiday 🎉 🎊 🎄
-      </Text>
+      <Box>
+        <Text fontSize="lg" fontWeight="semibold">
+          Feel the World Under Your Feet
+        </Text>
+        <Text fontSize="lg" color="green.600">
+          Coming soon to Futa this holiday 🎉 🎊 🎄
+        </Text>
+      </Box>
       <SlickSlider {...settings}>
-        {Array.from(new Array(20).fill('_')).map((_, idx) => (
+        {Array.from(new Array(21).fill('_')).map((_, idx) => (
           <SliderImage key={idx} src={`../assets/${idx + 1}.jpg`} />
         ))}
       </SlickSlider>
