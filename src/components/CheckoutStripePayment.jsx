@@ -109,7 +109,7 @@ const CheckoutStripePayment = ({ paymentCharge, currency, isSelected }) => {
 CheckoutStripePayment.propTypes = {
   paymentCharge: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
-  isSelected: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
 };
 
 export default CheckoutStripePayment;

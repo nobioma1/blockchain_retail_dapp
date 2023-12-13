@@ -8,6 +8,7 @@ import {
 } from 'react';
 import PropTypes from 'prop-types';
 import { Web3 } from 'web3';
+import { ABI } from '@/utils';
 
 export const Web3Context = createContext(null);
 
@@ -17,7 +18,7 @@ const Web3Provider = ({ children }) => {
 
   const ethRef = useRef(window.ethereum);
   const web3Ref = useRef(null);
-  const contract = useRef(null);
+  const contractRef = useRef(null);
 
   const handleConnectedAccount = useCallback(
     async (accounts) => {
@@ -47,11 +48,16 @@ const Web3Provider = ({ children }) => {
   useEffect(() => {
     if (!ethRef.current) return;
 
-    const connectContract = async (web3) => {
-      contract.current = await new window.web3.eth.Contract(ABI, Address);
+    const connect = async () => {
+      web3Ref.current = new Web3(ethRef.current);
+      const Address = '0x95f96becb92339fec9470d54bd9bfc3d84b4b2b8';
+      contractRef.current = await new web3Ref.current.eth.Contract(
+        ABI,
+        Address
+      );
     };
 
-    web3Ref.current = new Web3(ethRef.current);
+    connect();
     const provider = web3Ref.current.provider;
     const ACCOUNTS_CHANGED_EVENT = 'accountsChanged';
 
@@ -69,14 +75,25 @@ const Web3Provider = ({ children }) => {
 
   const isEnabledForWeb3 = isEnabled && ethRef.current;
 
+  const withdrawFromAccount = useCallback(
+    async (amount) => {
+      await contractRef.current.methods.deposit().send({
+        from: account,
+        value: web3Ref.current.utils.toWei(amount.toString(), 'ether'),
+      });
+    },
+    [account]
+  );
+
   const value = useMemo(
     () => ({
       account,
       isEnabled: isEnabledForWeb3,
       isConnected: Boolean(account),
+      withdrawFromAccount,
       requestAccounts,
     }),
-    [account, isEnabledForWeb3, requestAccounts]
+    [account, isEnabledForWeb3, requestAccounts, withdrawFromAccount]
   );
 
   return <Web3Context.Provider value={value}>{children}</Web3Context.Provider>;

@@ -61,6 +61,7 @@ const CartProvider = ({ children }) => {
       shoppingCart,
       addToCart,
       removeFromCart,
+      clearCart: () => setShoppingCart([]),
       decreaseQty: (itemId) => cartItemQty(itemId, 'SUBTR'),
       increaseQty: (itemId) => cartItemQty(itemId, 'ADD'),
     }),

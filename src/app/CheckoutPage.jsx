@@ -80,6 +80,9 @@ const CheckoutPage = () => {
             <Text fontSize="xl" fontWeight="bold">
               Order Complete
             </Text>
+            <Text fontSize="md" fontWeight="bold">
+              Thank you for shopping with us!!
+            </Text>
 
             {continueShoppingButton}
           </Stack>
