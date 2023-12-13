@@ -1,6 +1,7 @@
+import { Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react';
+
 import { useShoes } from '@hooks/queries/useShoes';
 import Product from './Product';
-import { Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react';
 
 const Products = () => {
   const { data = [], isLoading } = useShoes();

@@ -1,6 +1,8 @@
-// https://rapidapi.com/kaushiksheel9/api/shoes-collections/
+// @see https://docs.aircode.io/guide/functions/
+const aircode = require('aircode');
 
-export default [
+// https://rapidapi.com/kaushiksheel9/api/shoes-collections/
+const data = [
   {
     id: 1,
     name: 'Wild Rider Layers Unisex Sneakers',
@@ -422,3 +424,10 @@ export default [
     },
   },
 ];
+
+module.exports = async function (params, context) {
+  context.status(200);
+  return {
+    products: data,
+  };
+};

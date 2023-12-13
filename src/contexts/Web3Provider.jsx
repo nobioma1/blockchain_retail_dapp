@@ -17,6 +17,7 @@ const Web3Provider = ({ children }) => {
 
   const ethRef = useRef(window.ethereum);
   const web3Ref = useRef(null);
+  const contract = useRef(null);
 
   const handleConnectedAccount = useCallback(
     async (accounts) => {
@@ -46,6 +47,10 @@ const Web3Provider = ({ children }) => {
   useEffect(() => {
     if (!ethRef.current) return;
 
+    const connectContract = async (web3) => {
+      contract.current = await new window.web3.eth.Contract(ABI, Address);
+    };
+
     web3Ref.current = new Web3(ethRef.current);
     const provider = web3Ref.current.provider;
     const ACCOUNTS_CHANGED_EVENT = 'accountsChanged';
@@ -68,6 +73,7 @@ const Web3Provider = ({ children }) => {
     () => ({
       account,
       isEnabled: isEnabledForWeb3,
+      isConnected: Boolean(account),
       requestAccounts,
     }),
     [account, isEnabledForWeb3, requestAccounts]

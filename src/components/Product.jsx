@@ -4,6 +4,8 @@ import {
   Button,
   Divider,
   Flex,
+  HStack,
+  Icon,
   Image,
   Modal,
   ModalBody,
@@ -19,6 +21,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { BiCart } from 'react-icons/bi';
+import { HiOutlineStar } from 'react-icons/hi';
 
 import { useCart } from '@hooks/useCart';
 import QtyButton from '@/components/QtyButton';
@@ -66,9 +69,26 @@ const Product = (product) => {
             borderTopRadius="md"
           />
         </Box>
-        <Stack p={3} spacing={1}>
-          <Text>{displayPrice(product.price)}</Text>
-          <Text fontWeight="semibold">{product.name}</Text>
+        <Stack
+          p={3}
+          spacing={2}
+          minHeight="168px"
+          justifyContent="space-between"
+        >
+          <Stack spacing={2}>
+            <Text>{displayPrice(product.price)}</Text>
+            <Text fontWeight="semibold">{product.name}</Text>
+            <HStack>
+              {Array.from(new Array(5).fill('_')).map((_, idx) => (
+                <Icon
+                  key={idx}
+                  as={HiOutlineStar}
+                  fill={product.rating.rate > idx + 1 ? 'gold' : 'lightgray'}
+                  color={product.rating.rate > idx + 1 ? 'gold' : 'lightgray'}
+                />
+              ))}
+            </HStack>
+          </Stack>
           <Button
             size="sm"
             ref={finalRef}
@@ -90,11 +110,19 @@ const Product = (product) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add &quot;{product.name}&quot; to cart</ModalHeader>
+          <ModalHeader>Add product to my cart</ModalHeader>
           <Divider />
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Stack py={3} spacing={6}>
+              <Flex justifyContent="space-between">
+                <Text fontWeight="semibold" color="gray.700">
+                  Product Name:
+                </Text>
+                <Text textAlign="right" maxWidth="60%">
+                  {product.name}
+                </Text>
+              </Flex>
               <Flex justifyContent="space-between">
                 <Text fontWeight="semibold" color="gray.700">
                   Sizes

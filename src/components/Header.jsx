@@ -1,8 +1,8 @@
 import { Text, Flex, HStack, Icon } from '@chakra-ui/react';
 import { LiaShoePrintsSolid } from 'react-icons/lia';
+import { Link } from 'react-router-dom';
 
-import Cart from '@app/Cart';
-
+import Cart from '@components/Cart';
 import MetamaskButton from '@components/MetamaskButton';
 
 const Header = () => {
@@ -26,12 +26,14 @@ const Header = () => {
         justifyContent="space-between"
         cursor="pointer"
       >
-        <HStack>
-          <Icon as={LiaShoePrintsSolid} boxSize={6} />
-          <Text fontWeight="bold" fontSize="3xl" fontFamily="Bubblegum Sans">
-            Futas
-          </Text>
-        </HStack>
+        <Link to="/">
+          <HStack>
+            <Icon as={LiaShoePrintsSolid} boxSize={6} />
+            <Text fontWeight="bold" fontSize="3xl" fontFamily="Bubblegum Sans">
+              Futas
+            </Text>
+          </HStack>
+        </Link>
 
         <HStack spacing={3}>
           <Cart />

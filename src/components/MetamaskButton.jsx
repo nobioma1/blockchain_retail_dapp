@@ -4,6 +4,7 @@ import { Icon } from '@chakra-ui/icon';
 
 import { useWeb3 } from '@hooks/useWeb3';
 import { useToast } from '@hooks/useToast';
+import { displayWalletAddress } from '../utils';
 
 const metamaskIcon = (
   <Icon
@@ -145,27 +146,26 @@ const metamaskIcon = (
 
 const MetamaskButton = () => {
   const toast = useToast();
-  const { requestAccounts, account } = useWeb3();
+  const { requestAccounts, account, isConnected } = useWeb3();
   const isConnectedOnce = useRef(false);
-  const isConnected = Boolean(account);
 
   useEffect(() => {
-    if (account) {
+    if (isConnected) {
       toast('success', {
         title: 'Connected to account successfully',
-        description: `Account: ${account.slice(0, 4)}****${account.slice(-6)}`,
+        description: `Account: ${displayWalletAddress(account)}`,
       });
       isConnectedOnce.current = true;
     }
 
-    if (!account && isConnectedOnce.current) {
+    if (!isConnected && isConnectedOnce.current) {
       toast('warning', {
         title: 'No account connected',
       });
       isConnectedOnce.current = false;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account]);
+  }, [isConnected, account]);
 
   const handleConnectMetamask = async () => {
     if (isConnected) return;
