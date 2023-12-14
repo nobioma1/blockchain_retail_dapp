@@ -14,7 +14,7 @@ const CartSummary = ({ totalCost }) => {
       </Text>
       <Divider />
       <Box py={2} px={5} mb={8}>
-        {shoppingCart.map((item) => (
+        {shoppingCart?.map((item) => (
           <Flex
             py={3}
             key={item.id}

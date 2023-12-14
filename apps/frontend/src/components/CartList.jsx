@@ -31,7 +31,7 @@ const CartList = () => {
         </Thead>
         {shoppingCart.length > 0 && (
           <Tbody>
-            {shoppingCart.map((item) => (
+            {shoppingCart?.map((item) => (
               <Tr key={item.id}>
                 <Td>{item.product.name}</Td>
                 <Td>{item.cartItem.size}</Td>

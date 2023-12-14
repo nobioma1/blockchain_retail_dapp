@@ -19,7 +19,7 @@ const Products = () => {
 
   return (
     <Wrap spacing="32px">
-      {data.map((product) => (
+      {data?.map((product) => (
         <WrapItem
           key={product.id}
           borderWidth={1}
