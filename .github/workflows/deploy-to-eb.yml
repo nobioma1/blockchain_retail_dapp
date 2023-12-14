@@ -9,6 +9,7 @@ env:
   EB_APPLICATION_NAME: 'futa.dapp'
   EB_ARTIFACTS_BUCKET: 'sampleproject-artifacts'
   APP_BUNDLE_NAME: 'futa-${{ github.sha }}.zip'
+  EB_ENVIRONMENT_NAME: 'Futadapp-env'
 
 jobs:
   deploy:
@@ -22,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-      
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -51,4 +52,7 @@ jobs:
           --source-bundle S3Bucket="${{ env.EB_ARTIFACTS_BUCKET }}",S3Key="${{ env.APP_BUNDLE_NAME }}"
 
       - name: Deploy new application version
-        run: aws elasticbeanstalk update-environment --environment-name ${{ env.EB_ENVIRONMENT_NAME }} --version-label "${{ github.sha }}"
+        run: |
+          aws elasticbeanstalk update-environment \
+          --environment-name ${{ env.EB_ENVIRONMENT_NAME }} \
+          --version-label "${{ github.sha }}"
