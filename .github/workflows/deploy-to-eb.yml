@@ -4,12 +4,17 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '.github/**'
 
 env:
   EB_APPLICATION_NAME: 'futa.dapp'
   EB_ARTIFACTS_BUCKET: 'sampleproject-artifacts'
   APP_BUNDLE_NAME: 'futa-${{ github.sha }}.zip'
   EB_ENVIRONMENT_NAME: 'Futadapp-env'
+  VITE_API_URL: ${{ secrets.VITE_API_URL }}
+  VITE_COINLAYER_KEY: ${{ secrets.VITE_COINLAYER_KEY }}
+  VITE_STRIPE_PUB_KEY: ${{ secrets.VITE_STRIPE_PUB_KEY }}
 
 jobs:
   deploy:
@@ -39,7 +44,7 @@ jobs:
         run: npm run build
 
       - name: zip application to deploy
-        run: | 
+        run: |
           zip -r ${{ env.APP_BUNDLE_NAME }} \
           ./package*.json  \
           ./turbo.json \

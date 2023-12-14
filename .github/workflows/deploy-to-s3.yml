@@ -1,9 +1,6 @@
 name: deploy-to-s3.yml
 
-# on:
-#   push:
-#     branches:
-#       - main
+on: [workflow_dispatch]
 
 jobs:
   build:

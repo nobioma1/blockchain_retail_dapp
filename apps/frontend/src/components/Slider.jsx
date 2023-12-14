@@ -32,30 +32,6 @@ const settings = {
   slidesToShow: 3,
 };
 
-const slideImages = [
-  Image1,
-  Image2,
-  Image3,
-  Image4,
-  Image5,
-  Image6,
-  Image7,
-  Image8,
-  Image9,
-  Image10,
-  Image11,
-  Image12,
-  Image13,
-  Image14,
-  Image15,
-  Image16,
-  Image17,
-  Image18,
-  Image19,
-  Image20,
-  Image21,
-];
-
 const SliderImage = ({ src }) => {
   return (
     <Box pr={2}>
@@ -84,9 +60,27 @@ const Slider = () => {
         </Text>
       </Box>
       <SlickSlider {...settings}>
-        {slideImages.map((src, idx) => (
-          <SliderImage key={idx} src={src} />
-        ))}
+        <SliderImage src={Image1} />
+        <SliderImage src={Image2} />
+        <SliderImage src={Image3} />
+        <SliderImage src={Image4} />
+        <SliderImage src={Image5} />
+        <SliderImage src={Image6} />
+        <SliderImage src={Image7} />
+        <SliderImage src={Image8} />
+        <SliderImage src={Image9} />
+        <SliderImage src={Image10} />
+        <SliderImage src={Image11} />
+        <SliderImage src={Image12} />
+        <SliderImage src={Image13} />
+        <SliderImage src={Image14} />
+        <SliderImage src={Image15} />
+        <SliderImage src={Image16} />
+        <SliderImage src={Image17} />
+        <SliderImage src={Image18} />
+        <SliderImage src={Image19} />
+        <SliderImage src={Image20} />
+        <SliderImage src={Image21} />
       </SlickSlider>
     </Stack>
   );
