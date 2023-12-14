@@ -30,9 +30,7 @@ jobs:
         run: npm run build
 
       - name: zip application to deploy
-        run: |
-          cd ./dist && \
-          zip -r ${{ env.APP_BUNDLE_NAME }} ./dist/*
+        run: cd ./dist && zip -r ${{ env.APP_BUNDLE_NAME }} ./
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
