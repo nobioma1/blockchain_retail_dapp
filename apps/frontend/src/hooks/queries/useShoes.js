@@ -7,7 +7,7 @@ export const useShoes = () => {
     queryKey: ['products'],
     queryFn: async () => {
       const response = await backendApi.get('/products');
-      return response.data.products;
+      return response.data;
     },
   });
 };
