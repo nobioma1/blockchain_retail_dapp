@@ -90,9 +90,14 @@ const CheckoutEthPayment = ({ paymentCharge }) => {
 
             {ethRate && (
               <>
-                <Text>Rate: {ethRate} ETH</Text>
                 <Text>
-                  Amount:{' '}
+                  Rate: {ethRate} ETH{' '}
+                  <Text as="span" fontSize="sm">
+                    (source: CoinLayer)
+                  </Text>
+                </Text>
+                <Text>
+                  Total Cost in ETH:{' '}
                   <Text
                     fontWeight="semibold"
                     as="span"
@@ -101,7 +106,7 @@ const CheckoutEthPayment = ({ paymentCharge }) => {
                     {originalPrice} ETH
                   </Text>
                 </Text>
-                <Text>
+                <Text color="green">
                   Amount to Pay:{' '}
                   <Text fontWeight="semibold" as="span">
                     {discountedPrice} ETH
