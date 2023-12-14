@@ -9,6 +9,9 @@ env:
   EB_APPLICATION_NAME: 'futa.dapp'
   EB_ARTIFACTS_BUCKET: 'sampleproject-artifacts'
   APP_BUNDLE_NAME: 'futa-${{ github.sha }}.zip'
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   deploy:
