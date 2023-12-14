@@ -8,7 +8,7 @@ on:
 env:
   EB_APPLICATION_NAME: 'futa.dapp'
   EB_ARTIFACTS_BUCKET: 'sampleproject-artifacts'
-  APP_BUNDLE_NAME: '${{ secrets.PROJECT_NAME }}-${{ github.sha }}.zip'
+  APP_BUNDLE_NAME: 'futa-${{ github.sha }}.zip'
 
 jobs:
   deploy:
