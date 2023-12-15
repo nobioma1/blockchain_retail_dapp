@@ -25,7 +25,7 @@ export class AppService {
     const { amount, currency } = createParams;
     const stripe = new Stripe(this.configService.get('STRIPE_SECRET_KEY')!);
     const paymentIntent = await stripe.paymentIntents.create({
-      amount,
+      amount: Math.round(amount * 100),
       currency,
     });
 
